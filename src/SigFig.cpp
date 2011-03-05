@@ -4,7 +4,7 @@
 
 using namespace std;
 
-SigFig SigFig::unit() const
+const SigFig SigFig::unit() const
 {
 	return SigFig(pow(10, _precision), _precision);
 }

@@ -43,7 +43,7 @@ public:
 	double value() const;
 	short signum() const;
 	int sigfigs() const;
-	SigFig unit() const;
+	const SigFig unit() const;
 };
 
 #endif
