@@ -137,6 +137,28 @@ const SigFig& SigFig::operator*=(const SigFig& other)
 	return *this;
 }
 
+void SigFig::_divide(SigFig& out, const SigFig& a, const SigFig& b)
+{
+	int sigfigs = min(a.sigfigs(), b.sigfigs());
+	out._value = a._value / b._value;
+	int leading_place=floor(log10(abs(out._value)));
+	out._precision = leading_place - sigfigs + 1;
+}
+
+SigFig SigFig::operator/(const SigFig& other) const
+{
+	SigFig rv;
+	SigFig::_divide(rv, *this, other);
+	return rv;
+}
+
+const SigFig& SigFig::operator/=(const SigFig& other)
+{
+	SigFig::_divide(*this, *this, other);
+	return *this;
+}
+
+
 SigFig& SigFig::operator++()
 {
 	SigFig::_add(*this, *this, this->unit());

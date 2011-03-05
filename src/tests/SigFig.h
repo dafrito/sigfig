@@ -148,6 +148,7 @@ public:
 	{
 		SigFig a(2);
 		TS_ASSERT_EQUALS(a*SigFig(1), a);
+		TS_ASSERT_EQUALS(a/a, SigFig(1));
 	}
 
 };
