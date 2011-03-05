@@ -142,4 +142,10 @@ public:
 		TS_ASSERT_EQUALS(a-a, SigFig(0));
 	}
 
+	void testMultiplicationHasAnIdentityToo()
+	{
+		SigFig a(2);
+		TS_ASSERT_EQUALS(a*SigFig(1), a);
+	}
+
 };
