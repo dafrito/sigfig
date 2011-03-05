@@ -31,6 +31,8 @@ public:
 	const SigFig& operator*=(const SigFig& other);
 	const SigFig& operator/=(const SigFig& other);
 
+	SigFig operator-() const;
+
 	SigFig& operator++();
 	SigFig operator++(int) const;
 
@@ -38,7 +40,9 @@ public:
 	SigFig operator--(int) const;
 
 	bool operator<(const SigFig& other) const;
+	bool operator<=(const SigFig& other) const;
 	bool operator>(const SigFig& other) const;
+	bool operator>=(const SigFig& other) const;
 
 	double value() const;
 	short signum() const;

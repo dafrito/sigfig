@@ -100,8 +100,12 @@ public:
 
 	void testEqualPrecisionSigFigsCompareNaturally()
 	{
-		TS_ASSERT(SigFig(2) < SigFig(4));
-		TS_ASSERT(SigFig(3) > SigFig(-3));
+		TS_ASSERT(SigFig(2) < SigFig(3));
+		TS_ASSERT(SigFig(2) <= SigFig(3));
+		TS_ASSERT(SigFig(2) <= SigFig(2));
+		TS_ASSERT(SigFig(2) >= SigFig(2));
+		TS_ASSERT(SigFig(2) >= SigFig(1));
+		TS_ASSERT(SigFig(2) > SigFig(1));
 	}
 
 	void testPrecisionCanMakeUnequalValuesEffectivelyEqual()

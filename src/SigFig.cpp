@@ -70,9 +70,24 @@ bool SigFig::operator<(const SigFig& other) const
 	return (*this - other).signum() < 0;
 }
 
+bool SigFig::operator<=(const SigFig& other) const
+{
+	return (*this - other).signum() <= 0;
+}
+
 bool SigFig::operator>(const SigFig& other) const
 {
 	return (*this - other).signum() > 0;
+}
+
+bool SigFig::operator>=(const SigFig& other) const
+{
+	return (*this - other).signum() >= 0;
+}
+
+SigFig SigFig::operator-() const
+{
+	return SigFig(-_value, _precision);
 }
 
 void SigFig::_add(SigFig& out, const SigFig& a, const SigFig& b)
