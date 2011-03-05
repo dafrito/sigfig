@@ -14,7 +14,7 @@ all: $(LIB)
 .PHONY: all
 
 $(LIB): $(cpp_sources) $(cpp_headers) | $(BUILDDIR)
-	g++ $(CXXFLAGS) -shared -o $@ $(addprefix -l, $(libs)) $<
+	g++ $(CXXFLAGS) -shared -fPIC -o $@ $(addprefix -l, $(libs)) $<
 
 test: $(BUILDDIR)/testrunner
 	$(BUILDDIR)/testrunner
