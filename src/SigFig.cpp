@@ -65,30 +65,44 @@ bool SigFig::operator!=(const SigFig& other) const
 	return !(*this == other);
 }
 
-SigFig SigFig::operator+(const SigFig& other) const
+void SigFig::_add(SigFig& out, const SigFig& a, const SigFig& b)
 {
 	// While this looks like we're giving our value "maximum" precision,
 	// we're actually losing precision since we're pushing the precision
 	// to a bigger value.
-	return SigFig(_value + other._value, max(_precision, other._precision));
+	out._value = a._value + b._value;
+	out._precision = max(a._precision, b._precision);
 }
 
-SigFig SigFig::operator-(const SigFig& other) const
+SigFig SigFig::operator+(const SigFig& other) const
 {
-	return SigFig(_value - other._value, max(_precision, other._precision));
+	SigFig rv;
+	SigFig::_add(rv, *this, other);
+	return rv;
 }
 
 const SigFig& SigFig::operator+=(const SigFig& other)
 {
-	_value += other._value;
-	_precision = max(_precision, other._precision);
+	SigFig::_add(*this, *this, other);
 	return *this;
+}
+
+void SigFig::_subtract(SigFig& out, const SigFig& a, const SigFig& b)
+{
+	out._value = a._value - b._value;
+	out._precision = max(a._precision, b._precision);
+}
+
+SigFig SigFig::operator-(const SigFig& other) const
+{
+	SigFig rv;
+	SigFig::_subtract(rv, *this, other);
+	return rv;
 }
 
 const SigFig& SigFig::operator-=(const SigFig& other)
 {
-	_value -= other._value;
-	_precision = max(_precision, other._precision);
+	SigFig::_subtract(*this, *this, other);
 	return *this;
 }
 
@@ -118,20 +132,24 @@ SigFig SigFig::operator--(int) const
 	return *this - u;
 }
 
+void SigFig::_multiply(SigFig& out, const SigFig& a, const SigFig& b)
+{
+	int sigfigs = min(a.sigfigs(), b.sigfigs());
+	out._value = a._value * b._value;
+	int leading_place=floor(log10(abs(out._value)));
+	out._precision = leading_place - sigfigs + 1;
+}
+
 SigFig SigFig::operator*(const SigFig& other) const
 {
-	int sigfigs = min(this->sigfigs(), other.sigfigs());
-	double multiple = _value * other._value;
-	int leading_place=floor(log10(abs(multiple)));
-	return SigFig(multiple, leading_place - sigfigs + 1);
+	SigFig rv;
+	SigFig::_multiply(rv, *this, other);
+	return rv;
 }
 
 const SigFig& SigFig::operator*=(const SigFig& other)
 {
-	int sigfigs = min(this->sigfigs(), other.sigfigs());
-	_value *= other._value;
-	int leading_place=floor(log10(abs(_value)));
-	_precision = leading_place - sigfigs + 1;
+	SigFig::_multiply(*this, *this, other);
 	return *this;
 }
 

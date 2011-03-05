@@ -6,6 +6,13 @@ class SigFig
 private:
 	double _value;
 	int _precision;
+
+	SigFig() : _value(0), _precision(0) {}
+
+protected:
+	static void _multiply(SigFig& out, const SigFig& a, const SigFig& b);
+	static void _add(SigFig& out, const SigFig& a, const SigFig& b);
+	static void _subtract(SigFig& out, const SigFig& a, const SigFig& b);
 public:
 	SigFig(double value) : 
 		_value(value), _precision(0) {}
@@ -17,9 +24,9 @@ public:
 	SigFig operator+(const SigFig& other) const;
 	SigFig operator-(const SigFig& other) const;
 	SigFig operator*(const SigFig& other) const;
+	const SigFig& operator*=(const SigFig& other);
 	const SigFig& operator+=(const SigFig& other);
 	const SigFig& operator-=(const SigFig& other);
-	const SigFig& operator*=(const SigFig& other);
 
 	SigFig& operator++();
 	SigFig operator++(int) const;
