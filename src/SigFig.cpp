@@ -118,6 +118,16 @@ SigFig SigFig::operator--(int) const
 	return *this - u;
 }
 
+SigFig SigFig::operator*(const SigFig& other) const
+{
+	double multiple = _value * other._value;
+	int sigfigs = min(this->sigfigs(), other.sigfigs());
+
+	int leading_place=floor(log10(abs(multiple)));
+
+	return SigFig(multiple, leading_place - sigfigs + 1);
+}
+
 bool SigFig::operator<(const SigFig& other) const
 {
 	return (*this - other).signum() < 0;

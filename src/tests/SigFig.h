@@ -125,4 +125,21 @@ public:
 		TS_ASSERT_EQUALS(SigFig(-1234).sigfigs(), 4);
 		TS_ASSERT_EQUALS(SigFig(-.1234, -4).sigfigs(), 4);
 	}
+
+	void testMultiplyingSigFigsDoesntChangeTheNumberOfSigFigs()
+	{
+		SigFig a(2), b(5);
+		TS_ASSERT_EQUALS(a.sigfigs(), 1);
+		TS_ASSERT_EQUALS((a*b).sigfigs(), 1);
+		TS_ASSERT_EQUALS((a*b), SigFig(10, 1));
+		TS_ASSERT_EQUALS((a*b)*SigFig(10), SigFig(100, 2));
+	}
+
+	void testAdditionHasAZeroIdentity()
+	{
+		SigFig a(2);
+		TS_ASSERT_EQUALS(a+SigFig(0), a);
+		TS_ASSERT_EQUALS(a-a, SigFig(0));
+	}
+
 };

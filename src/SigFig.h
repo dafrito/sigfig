@@ -16,6 +16,7 @@ public:
 	bool operator!=(const SigFig& other) const;
 	SigFig operator+(const SigFig& other) const;
 	SigFig operator-(const SigFig& other) const;
+	SigFig operator*(const SigFig& other) const;
 	const SigFig& operator+=(const SigFig& other);
 	const SigFig& operator-=(const SigFig& other);
 
