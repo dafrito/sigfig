@@ -9,7 +9,7 @@ const SigFig SigFig::unit() const
 	return SigFig(pow(10, _precision), _precision);
 }
 
-short SigFig::signum() const
+short SigFig::sign() const
 {
 	if (this->value() == 0)
 		return 0;
@@ -67,22 +67,22 @@ bool SigFig::operator!=(const SigFig& other) const
 
 bool SigFig::operator<(const SigFig& other) const
 {
-	return (*this - other).signum() < 0;
+	return (*this - other).sign() < 0;
 }
 
 bool SigFig::operator<=(const SigFig& other) const
 {
-	return (*this - other).signum() <= 0;
+	return (*this - other).sign() <= 0;
 }
 
 bool SigFig::operator>(const SigFig& other) const
 {
-	return (*this - other).signum() > 0;
+	return (*this - other).sign() > 0;
 }
 
 bool SigFig::operator>=(const SigFig& other) const
 {
-	return (*this - other).signum() >= 0;
+	return (*this - other).sign() >= 0;
 }
 
 SigFig SigFig::operator-() const

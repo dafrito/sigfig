@@ -45,7 +45,7 @@ public:
 	bool operator>=(const SigFig& other) const;
 
 	double value() const;
-	short signum() const;
+	short sign() const;
 	int sigfigs() const;
 	const SigFig unit() const;
 };

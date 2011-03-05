@@ -13,20 +13,20 @@ public:
 		TS_ASSERT_EQUALS(SigFig(2, 3), SigFig(2, 3));
 	}
 
-	void testSignumReturnsTheSign()
+	void testSignReturnsTheSign()
 	{
-		TS_ASSERT_EQUALS(SigFig(1).signum(), 1);
-		TS_ASSERT_EQUALS(SigFig(-200).signum(), -1);
+		TS_ASSERT_EQUALS(SigFig(1).sign(), 1);
+		TS_ASSERT_EQUALS(SigFig(-200).sign(), -1);
 	}
 
-	void testSignumRoundsImpreciseValues()
+	void testSignRoundsImpreciseValues()
 	{
-		TS_ASSERT_EQUALS(SigFig(-2, 2).signum(), 0);
+		TS_ASSERT_EQUALS(SigFig(-2, 2).sign(), 0);
 	}
 
-	void testSignumConsidersZeroZero()
+	void testSignConsidersZeroZero()
 	{
-		TS_ASSERT_EQUALS(SigFig(0, 2).signum(), 0);
+		TS_ASSERT_EQUALS(SigFig(0, 2).sign(), 0);
 	}
 
 	void testUnitOfASigFigIsBasedOffItsPrecision()
