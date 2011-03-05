@@ -120,12 +120,19 @@ SigFig SigFig::operator--(int) const
 
 SigFig SigFig::operator*(const SigFig& other) const
 {
-	double multiple = _value * other._value;
 	int sigfigs = min(this->sigfigs(), other.sigfigs());
-
+	double multiple = _value * other._value;
 	int leading_place=floor(log10(abs(multiple)));
-
 	return SigFig(multiple, leading_place - sigfigs + 1);
+}
+
+const SigFig& SigFig::operator*=(const SigFig& other)
+{
+	int sigfigs = min(this->sigfigs(), other.sigfigs());
+	_value *= other._value;
+	int leading_place=floor(log10(abs(_value)));
+	_precision = leading_place - sigfigs + 1;
+	return *this;
 }
 
 bool SigFig::operator<(const SigFig& other) const

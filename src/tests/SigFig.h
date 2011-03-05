@@ -133,6 +133,8 @@ public:
 		TS_ASSERT_EQUALS((a*b).sigfigs(), 1);
 		TS_ASSERT_EQUALS((a*b), SigFig(10, 1));
 		TS_ASSERT_EQUALS((a*b)*SigFig(10), SigFig(100, 2));
+		b*=a;
+		TS_ASSERT_EQUALS(b, SigFig(10, 1));
 	}
 
 	void testAdditionHasAZeroIdentity()
