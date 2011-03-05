@@ -1,0 +1,10 @@
+* Parameterize SigFig on a value type. 
+
+Right now, we force SigFigs to all be doubles. This is okay, but it'd be
+nice if we could do something like:
+
+SigFig<FixedPoint> a;
+SigFig<long> a;
+
+I'm not sure how hard it would be to do this, in practice. Without it, we're
+stuck with doubles, which is satisfacotry.
