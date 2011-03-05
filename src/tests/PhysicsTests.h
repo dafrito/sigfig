@@ -7,28 +7,33 @@ using namespace std;
 class PhysicsTests : public CxxTest::TestSuite
 {
 public:
-	void testEqualNumbers()
+	void testExactlyEqualNumbersAreEqual()
 	{
 		TS_ASSERT_EQUALS(SigFig(2), SigFig(2));
 		TS_ASSERT_EQUALS(SigFig(2, 3), SigFig(2, 3));
 	}
 
-	void testBasicProperties()
+	void testSignumReturnsTheSign()
 	{
 		TS_ASSERT_EQUALS(SigFig(1).signum(), 1);
 		TS_ASSERT_EQUALS(SigFig(-200).signum(), -1);
 	}
 
-	void testSigFigHasUnitValues()
+	void testUnitOfASigFigIsBasedOffItsPrecision()
 	{
 		TS_ASSERT_EQUALS(SigFig(5).unit(), SigFig(1));
 		TS_ASSERT_EQUALS(SigFig(500, 2).unit(), SigFig(pow(10, 2), 2));
 	}
 
-	void testUnequalNumbers()
+	void testSufficientlyUnequalValuesAreUnequal()
 	{
 		TS_ASSERT_DIFFERS(SigFig(1), SigFig(2));
 		TS_ASSERT_DIFFERS(SigFig(34), SigFig(42));
+	}
+
+
+	void testPrecisionMattersWhenDeterminingEquality()
+	{
 		TS_ASSERT_DIFFERS(SigFig(1), SigFig(1, -3));
 	}
 
@@ -38,56 +43,43 @@ public:
 		TS_ASSERT_EQUALS(SigFig(-30, 1), SigFig(-34, 1));
 	}
 
-	void testFindAnBestValueOfASigFig()
+	void testValueOfASigFigCanBeRounded()
 	{
 		TS_ASSERT_EQUALS(SigFig(12, 1).value(), 10.0);
 		TS_ASSERT_EQUALS(SigFig(22, 1).value(), 20.0);
 		TS_ASSERT_EQUALS(SigFig(-28, 1).value(), -30.0);
 	}
 
-	void testAddingTwoSigFigs()
+	void testAdditionAndSubtractionWorkNormally()
 	{
-		TS_ASSERT_EQUALS(SigFig(1) + SigFig(1), SigFig(2));
-		TS_ASSERT_EQUALS(SigFig(1) + SigFig(-1), SigFig(0));
-	}
-
-	void testAddingASigFig()
-	{
-		SigFig a(14);
-		a += 3;
-		TS_ASSERT_EQUALS(a, SigFig(17));
-	}
-
-	void testSubtractingSigFigs()
-	{
+		TS_ASSERT_EQUALS(SigFig(2) + SigFig(3), SigFig(5));
 		TS_ASSERT_EQUALS(SigFig(3) - SigFig(1), SigFig(2));
-	}
-
-	void testSubtractingFromASigFig()
-	{
 		SigFig a(14);
-		a -= 3;
+		a -= SigFig(3, -3);
 		TS_ASSERT_EQUALS(a, SigFig(11));
+		a += SigFig(3, -3);
+		TS_ASSERT_EQUALS(a, SigFig(14));
 	}
 
-	void testPrefixIncrementingASigFig()
+	void testWorkingWithImpreciseValuesCanLeadToNoops()
 	{
-		SigFig a(10, 1);
-		TS_ASSERT_EQUALS(++a, SigFig(20, 1));
-		SigFig b(10, -1);
-		TS_ASSERT_EQUALS(++b, SigFig(10.1, -1));
+		TS_ASSERT_EQUALS(SigFig(100, 2) + SigFig(1), SigFig(100, 2));
+		TS_ASSERT_EQUALS(SigFig(300, 2) - SigFig(1), SigFig(300, 2));
 	}
 
-	void testPostfixIncrementingASigFig()
+	void testSigFigsIncrementByTheirUnits()
 	{
 		SigFig a(10, 1);
 		TS_ASSERT_EQUALS(a++, SigFig(20, 1));
-		TS_ASSERT_EQUALS(a, SigFig(10, 1));
+		++a;
+		TS_ASSERT_EQUALS(a, SigFig(20, 1));
 	}
 
-	void testDecrementingASigFig()
+	void testSigFigsDecrementByTheirUnits()
 	{
 		SigFig a(10.1, -1);
-		TS_ASSERT_EQUALS(a--, SigFig(10, 1));
+		TS_ASSERT_EQUALS(a--, SigFig(10, -1));
+		--a;
+		TS_ASSERT_EQUALS(a, SigFig(10, -1));
 	}
 };
