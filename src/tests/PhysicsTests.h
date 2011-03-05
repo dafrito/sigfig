@@ -55,9 +55,9 @@ public:
 		TS_ASSERT_EQUALS(SigFig(2) + SigFig(3), SigFig(5));
 		TS_ASSERT_EQUALS(SigFig(3) - SigFig(1), SigFig(2));
 		SigFig a(14);
-		a -= SigFig(3, -3);
+		a -= SigFig(3);
 		TS_ASSERT_EQUALS(a, SigFig(11));
-		a += SigFig(3, -3);
+		a += SigFig(3);
 		TS_ASSERT_EQUALS(a, SigFig(14));
 	}
 
@@ -65,6 +65,11 @@ public:
 	{
 		TS_ASSERT_EQUALS(SigFig(100, 2) + SigFig(1), SigFig(100, 2));
 		TS_ASSERT_EQUALS(SigFig(300, 2) - SigFig(1), SigFig(300, 2));
+		SigFig a(50, 1);
+		a += SigFig(1);
+		TS_ASSERT_EQUALS(a, SigFig(50, 1));
+		a -= SigFig(1);
+		TS_ASSERT_EQUALS(a, SigFig(50, 1));
 	}
 
 	void testSigFigsIncrementByTheirUnits()
