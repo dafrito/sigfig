@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class PhysicsTests : public CxxTest::TestSuite
+class SigFigTest : public CxxTest::TestSuite
 {
 public:
 	void testExactlyEqualNumbersAreEqual()
