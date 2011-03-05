@@ -1,5 +1,5 @@
 #include <cxxtest/TestSuite.h>
-#include "SigFig.h"
+#include "../SigFig.h"
 #include <cmath>
 
 using namespace std;
