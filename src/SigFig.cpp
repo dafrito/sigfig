@@ -65,6 +65,16 @@ bool SigFig::operator!=(const SigFig& other) const
 	return !(*this == other);
 }
 
+bool SigFig::operator<(const SigFig& other) const
+{
+	return (*this - other).signum() < 0;
+}
+
+bool SigFig::operator>(const SigFig& other) const
+{
+	return (*this - other).signum() > 0;
+}
+
 void SigFig::_add(SigFig& out, const SigFig& a, const SigFig& b)
 {
 	// While this looks like we're giving our value "maximum" precision,
@@ -106,32 +116,6 @@ const SigFig& SigFig::operator-=(const SigFig& other)
 	return *this;
 }
 
-SigFig& SigFig::operator++()
-{
-	SigFig u=this->unit();
-	*this += u;
-	return *this;
-}
-
-SigFig SigFig::operator++(int) const
-{
-	SigFig u=this->unit();
-	return *this + u;
-}
-
-SigFig& SigFig::operator--()
-{
-	SigFig u=this->unit();
-	*this -= u;
-	return *this;
-}
-
-SigFig SigFig::operator--(int) const
-{
-	SigFig u=this->unit();
-	return *this - u;
-}
-
 void SigFig::_multiply(SigFig& out, const SigFig& a, const SigFig& b)
 {
 	int sigfigs = min(a.sigfigs(), b.sigfigs());
@@ -153,12 +137,28 @@ const SigFig& SigFig::operator*=(const SigFig& other)
 	return *this;
 }
 
-bool SigFig::operator<(const SigFig& other) const
+SigFig& SigFig::operator++()
 {
-	return (*this - other).signum() < 0;
+	SigFig::_add(*this, *this, this->unit());
+	return *this;
 }
 
-bool SigFig::operator>(const SigFig& other) const
+SigFig SigFig::operator++(int) const
 {
-	return (*this - other).signum() > 0;
+	SigFig rv;
+	SigFig::_add(rv, *this, this->unit());
+	return rv;
+}
+
+SigFig& SigFig::operator--()
+{
+	SigFig::_subtract(*this, *this, this->unit());
+	return *this;
+}
+
+SigFig SigFig::operator--(int) const
+{
+	SigFig rv;
+	SigFig::_subtract(rv, *this, this->unit());
+	return rv;
 }
