@@ -5,7 +5,7 @@ class SigFig
 {
 private:
 	double _value;
-	long _precision;
+	int _precision;
 public:
 	SigFig(double value) : 
 		_value(value), _precision(0) {}
