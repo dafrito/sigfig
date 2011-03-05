@@ -21,12 +21,12 @@ public:
 
 	void testSignumRoundsImpreciseValues()
 	{
-		TS_ASSERT_EQUALS(SigFig(-2, 2).signum(), 1);
+		TS_ASSERT_EQUALS(SigFig(-2, 2).signum(), 0);
 	}
 
-	void testSignumConsidersZeroPositive()
+	void testSignumConsidersZeroZero()
 	{
-		TS_ASSERT_EQUALS(SigFig(0, 2).signum(), 1);
+		TS_ASSERT_EQUALS(SigFig(0, 2).signum(), 0);
 	}
 
 	void testUnitOfASigFigIsBasedOffItsPrecision()

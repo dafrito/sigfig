@@ -11,7 +11,9 @@ SigFig SigFig::unit() const
 
 short SigFig::signum() const
 {
-	return this->value() >= 0 ? 1 : -1;
+	if (this->value() == 0)
+		return 0;
+	return this->value() > 0 ? 1 : -1;
 }
 
 ///
