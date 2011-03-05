@@ -137,6 +137,12 @@ public:
 		TS_ASSERT_EQUALS(b, SigFig(10, 1));
 	}
 
+	void testDivisionWorksVerySimilarToMultiplication()
+	{
+		SigFig a(10), b(5);
+		TS_ASSERT_EQUALS(a/b, SigFig(2));
+	}
+
 	void testAdditionHasAZeroIdentity()
 	{
 		SigFig a(2);
