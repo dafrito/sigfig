@@ -11,7 +11,7 @@ SigFig SigFig::unit() const
 
 short SigFig::signum() const
 {
-	return _value > 0 ? 1 : -1;
+	return this->value() >= 0 ? 1 : -1;
 }
 
 ///
@@ -24,7 +24,7 @@ double SigFig::value() const
 	));
 	double best_value = _value - estimated_value;
 	if (greatest_digit >= 5)
-		best_value += this->signum() * pow(10, _precision);
+		best_value += (_value > 0 ? 1 : -1) * pow(10, _precision);
 	return best_value;
 }
 

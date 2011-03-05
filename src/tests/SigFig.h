@@ -19,6 +19,16 @@ public:
 		TS_ASSERT_EQUALS(SigFig(-200).signum(), -1);
 	}
 
+	void testSignumRoundsImpreciseValues()
+	{
+		TS_ASSERT_EQUALS(SigFig(-2, 2).signum(), 1);
+	}
+
+	void testSignumConsidersZeroPositive()
+	{
+		TS_ASSERT_EQUALS(SigFig(0, 2).signum(), 1);
+	}
+
 	void testUnitOfASigFigIsBasedOffItsPrecision()
 	{
 		TS_ASSERT_EQUALS(SigFig(5).unit(), SigFig(1));
