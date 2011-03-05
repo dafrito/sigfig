@@ -16,6 +16,12 @@ short SigFig::signum() const
 	return this->value() > 0 ? 1 : -1;
 }
 
+int SigFig::sigfigs() const
+{
+	int leading_place=floor(log10(abs(_value)));
+	return max(0, leading_place-_precision+1);
+}
+
 ///
 // Return the closest value that represents the exact portion of this significant figure.
 double SigFig::value() const

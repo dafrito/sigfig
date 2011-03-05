@@ -109,4 +109,11 @@ public:
 		TS_ASSERT(SigFig(2) > SigFig(4, 2));
 	}
 
+	void testSigFigsHaveADiscreteNumberOfSigFigs()
+	{
+		TS_ASSERT_EQUALS(SigFig(1234, 3).sigfigs(), 1);
+		TS_ASSERT_EQUALS(SigFig(1234).sigfigs(), 4);
+		TS_ASSERT_EQUALS(SigFig(-1234).sigfigs(), 4);
+		TS_ASSERT_EQUALS(SigFig(-.1234, -4).sigfigs(), 4);
+	}
 };
