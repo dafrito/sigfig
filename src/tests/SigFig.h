@@ -104,9 +104,18 @@ public:
 		TS_ASSERT(SigFig(3) > SigFig(-3));
 	}
 
-	void testDifferingPrecisionValuesFallBackNaturally()
+	void testPrecisionCanMakeUnequalValuesEffectivelyEqual()
 	{
-		TS_ASSERT(SigFig(2) > SigFig(4, 2));
+		TS_ASSERT(false == (SigFig(2) > SigFig(4, 2)));
+		TS_ASSERT(false == (SigFig(2) < SigFig(4, 2)));
+		TS_ASSERT(SigFig(2) != SigFig(4, 2));
+	}
+
+	void testSignificantValueCanEmergeFromMultipleInsignificantValues()
+	{
+		TS_ASSERT_EQUALS(SigFig(0), SigFig(.2));
+		TS_ASSERT_EQUALS(SigFig(0), SigFig(.4));
+		TS_ASSERT_EQUALS(SigFig(1), SigFig(.4)+SigFig(.4)+SigFig(.2));
 	}
 
 	void testSigFigsHaveADiscreteNumberOfSigFigs()
