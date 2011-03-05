@@ -54,25 +54,28 @@ bool SigFig::operator==(const SigFig& other) const
 
 SigFig SigFig::operator+(const SigFig& other) const
 {
-	return SigFig(_value + other._value, min(_precision, other._precision));
+	// While this looks like we're giving our value "maximum" precision,
+	// we're actually losing precision since we're pushing the precision
+	// to a bigger value.
+	return SigFig(_value + other._value, max(_precision, other._precision));
 }
 
 SigFig SigFig::operator-(const SigFig& other) const
 {
-	return SigFig(_value - other._value, min(_precision, other._precision));
+	return SigFig(_value - other._value, max(_precision, other._precision));
 }
 
 const SigFig& SigFig::operator+=(const SigFig& other)
 {
 	_value += other._value;
-	_precision = min(_precision, other._precision);
+	_precision = max(_precision, other._precision);
 	return *this;
 }
 
 const SigFig& SigFig::operator-=(const SigFig& other)
 {
 	_value -= other._value;
-	_precision = min(_precision, other._precision);
+	_precision = max(_precision, other._precision);
 	return *this;
 }
 
