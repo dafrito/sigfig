@@ -60,6 +60,11 @@ bool SigFig::operator==(const SigFig& other) const
 	return abs(_value - other._value) < pow(10, _precision);
 }
 
+bool SigFig::operator!=(const SigFig& other) const
+{
+	return !(*this == other);
+}
+
 SigFig SigFig::operator+(const SigFig& other) const
 {
 	// While this looks like we're giving our value "maximum" precision,

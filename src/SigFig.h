@@ -13,6 +13,7 @@ public:
 		_value(value), _precision(precision) {}
 
 	bool operator==(const SigFig& other) const;
+	bool operator!=(const SigFig& other) const;
 	SigFig operator+(const SigFig& other) const;
 	SigFig operator-(const SigFig& other) const;
 	const SigFig& operator+=(const SigFig& other);
