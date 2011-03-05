@@ -104,3 +104,13 @@ SigFig SigFig::operator--(int) const
 	SigFig u=this->unit();
 	return *this - u;
 }
+
+bool SigFig::operator<(const SigFig& other) const
+{
+	return (*this - other).signum() < 0;
+}
+
+bool SigFig::operator>(const SigFig& other) const
+{
+	return (*this - other).signum() > 0;
+}

@@ -24,6 +24,9 @@ public:
 	SigFig& operator--();
 	SigFig operator--(int) const;
 
+	bool operator<(const SigFig& other) const;
+	bool operator>(const SigFig& other) const;
+
 	double value() const;
 	short signum() const;
 	SigFig unit() const;

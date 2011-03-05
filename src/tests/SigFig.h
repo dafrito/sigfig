@@ -97,4 +97,16 @@ public:
 		--a;
 		TS_ASSERT_EQUALS(a, SigFig(10, -1));
 	}
+
+	void testEqualPrecisionSigFigsCompareNaturally()
+	{
+		TS_ASSERT(SigFig(2) < SigFig(4));
+		TS_ASSERT(SigFig(3) > SigFig(-3));
+	}
+
+	void testDifferingPrecisionValuesFallBackNaturally()
+	{
+		TS_ASSERT(SigFig(2) > SigFig(4, 2));
+	}
+
 };
