@@ -2,7 +2,7 @@ CXXFLAGS=-Wall -Werror -g -std=c++0x
 BUILDDIR=build
 SRCDIR=src
 TESTDIR=$(SRCDIR)/tests
-NAME=phys
+NAME=sigfig
 LIB=$(BUILDDIR)/lib$(NAME).so
 
 libs=
