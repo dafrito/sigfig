@@ -8,3 +8,6 @@ SigFig<long> a;
 
 I'm not sure how hard it would be to do this, in practice. Without it, we're
 stuck with doubles, which is satisfacotry.
+
+* Use std's numeric_limits to determine precision, accuracy, etc. Preferably once SigFig<t> exists
+
